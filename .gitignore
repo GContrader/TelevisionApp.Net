@@ -1,0 +1,16 @@
+﻿################################################################################
+# Il file gitignore è stato creato automaticamente da Microsoft(R) Visual Studio.
+################################################################################
+
+/ToDoApp.Api/.vs/ToDoApp.Api
+/.vs
+/ToDoApp.Api/bin/Debug/net5.0
+/ToDoApp.Api/obj
+/ToDoApp.BusinessLayer/bin/Debug
+/ToDoApp.BusinessLayer/obj
+/ToDoApp.DataAccessLayerr/bin/Debug/net5.0
+/ToDoApp.DataAccessLayerr/obj
+/ToDoApp.Shared/obj
+/ToDoApp.Api/bin/Debug/net7.0
+/ToDoApp.DataAccessLayerr/bin/Debug/net7.0
+/ToDoApp.Api/.vs/ProjectEvaluation
