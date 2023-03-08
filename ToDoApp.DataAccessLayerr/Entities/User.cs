@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace ToDoApp.DataAccessLayer.Entities;
     public partial class User
@@ -9,5 +9,6 @@ namespace ToDoApp.DataAccessLayer.Entities;
         public string Email { get; set; }
         public string Indirizzo { get; set; }
         public DateTime DataNascita { get; set; }
-        public Ruolo Ruolo { get; set; }    
+        public Ruolo Ruolo { get; set; }
+        public List<Programma> listaPreferiti { get; set; }
     }

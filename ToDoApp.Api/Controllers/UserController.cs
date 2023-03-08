@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using ToDoApp.BusinessLayer.Services.Interfaces;
 using System.Collections.Generic;
 using ToDoApp.BusinessLayer.Models;
-using Serilog;
 
 namespace ToDoApp.Api.Controllers
 {
@@ -26,23 +25,17 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> CreateUser(UserDTO userDTO)
+        public async Task<ActionResult<IEnumerable<UserDTO>>> PostUserDto(CreaUserDTO dto)
         {
-            return this.Ok(await this._userService.PostUserAsinc(userDTO));
+            return this.Ok(await this._userService.PostUserAsinc(dto));
         }
 
-        //ADMIN
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<bool>> UpdateUser(long id, UserDTO userDto)
+        [HttpPost("/preferito")]
+        public async Task<ActionResult> SetPreferito(int user_id, int prog_id)
         {
-            return this.Ok(await this._userService.UpdateUser(id, userDto));    
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteUser(long id)
-        {
-            return this.Ok(await this._userService.DeleteUser(id));
+            var res = await _userService.SetPreferito(user_id, prog_id);
+            return this.Ok(res);
         }
     }
 }
