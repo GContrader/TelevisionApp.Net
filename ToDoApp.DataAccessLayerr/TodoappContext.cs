@@ -15,6 +15,7 @@ public partial class TodoappContext : DbContext
     }
 
     public virtual DbSet<TodoItem> TodoItems { get; set; }
+    public virtual DbSet<Programma> Programma { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -35,6 +36,18 @@ public partial class TodoappContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("name");
         });
+
+        modelBuilder.Entity<Programma>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.ToTable("Programma");
+
+            entity.Property(e => e.Nome).HasColumnName("Nome");
+            entity.Property(e => e.Orario).HasColumnName("Orario");
+
+
+        }
+        );
 
         OnModelCreatingPartial(modelBuilder);
     }

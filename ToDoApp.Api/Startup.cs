@@ -9,6 +9,7 @@ using Serilog;
 using System;
 using ToDoApp.BusinessLayer.Mappers;
 using ToDoApp.BusinessLayer.Services;
+using ToDoApp.BusinessLayer.Services.Interfaces;
 using ToDoApp.DataAccessLayer;
 
 namespace ToDoApp.Api
@@ -37,6 +38,7 @@ namespace ToDoApp.Api
             });
 
             services.AddScoped<ITodoService, ToDoService>();
+            services.AddScoped<IProgrammaService, ProgrammaService>();
 
             var connectionStringDb = Configuration["Database:localhost"];
 
