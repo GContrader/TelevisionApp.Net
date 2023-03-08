@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToDoApp.DataAccessLayer.Entities;
-
 namespace ToDoApp.DataAccessLayer;
 
 public partial class TodoappContext : DbContext
@@ -15,11 +14,8 @@ public partial class TodoappContext : DbContext
     }
 
     public virtual DbSet<TodoItem> TodoItems { get; set; }
-<<<<<<< HEAD
     public virtual DbSet<User> Users { get; set; }
-=======
     public virtual DbSet<Programma> Programma { get; set; }
->>>>>>> test_main
 
     public virtual DbSet<Azienda> Aziendas { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,7 +38,6 @@ public partial class TodoappContext : DbContext
                 .HasColumnName("name");
         });
 
-<<<<<<< HEAD
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(u => u.Id).HasName("PK__User");
@@ -65,8 +60,12 @@ public partial class TodoappContext : DbContext
             entity.Property(a => a.Id).HasColumnName("id");
             entity.Property(a => a.Name).HasColumnName("name");
 
+            modelBuilder.Entity<Programma>()
+                .HasOne(u => u.Azienda)
+                .WithMany(u => u.Programmi); 
+
         });
-=======
+
         modelBuilder.Entity<Programma>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -78,7 +77,6 @@ public partial class TodoappContext : DbContext
 
         }
         );
->>>>>>> test_main
 
         OnModelCreatingPartial(modelBuilder);
     }

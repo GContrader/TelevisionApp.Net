@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoApp.DataAccessLayer.Entities;
 
 namespace ToDoApp.BusinessLayer.Models
 {
@@ -13,5 +14,7 @@ namespace ToDoApp.BusinessLayer.Models
         public string Nome { get; set; }
 
         public DateTime Orario { get; set; }
+
+        public Azienda Azienda { get; set; }
     }
 }

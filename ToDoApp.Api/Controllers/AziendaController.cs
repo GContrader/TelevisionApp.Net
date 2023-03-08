@@ -23,5 +23,33 @@ namespace ToDoApp.Api.Controllers
         {
             return this.Ok(await this._aziendaService.getAll());    
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AziendaDTO>> getAziendaByid(long id)
+        {
+            return this.Ok(await this._aziendaService.getAziendaById(id));
+        }
+
+        //ADMIN e AZIENDA
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> deleteAzienda(long id)
+        {
+            return this.Ok(await this._aziendaService.DeleteAzienda(id));   
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<bool>> updateAzienda(long id, AziendaDTO aziendaDTO)
+        {
+            return this.Ok(await this._aziendaService.UpdateAzienda(id, aziendaDTO));   
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<AziendaDTO>> postAzienda(AziendaDTO aziendaDTO)
+        {
+            return this.Ok(await this._aziendaService.PostAzienda(aziendaDTO));   
+        }
+
+
     }
 }

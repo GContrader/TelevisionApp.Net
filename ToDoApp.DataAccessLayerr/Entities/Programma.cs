@@ -9,5 +9,7 @@ public class Programma
     public string Nome { get; set; }
 
     public DateTime Orario { get; set; }
+
+    public Azienda Azienda; 
 }
 

@@ -11,6 +11,6 @@ namespace ToDoApp.DataAccessLayer.Entities
         public long Id { get; set; }
         public string Name { get; set; }
 
-      //  public List<Programmi> Programmi {get; set; }
+        public List<Programma> Programmi {get; set; }
     }
 }

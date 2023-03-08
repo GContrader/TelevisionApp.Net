@@ -11,5 +11,12 @@ namespace ToDoApp.BusinessLayer.Services.Interfaces
     {
         Task<IEnumerable<UserDTO>> GetUsersAsinc();
         Task<UserDTO> PostUserAsinc(UserDTO userDTO);
+
+        Task<UserDTO> GetUserById(long id);
+
+        Task<bool> DeleteUser(long id);
+
+        Task <bool> UpdateUser(long id, UserDTO userDTO);
+
     }
 }
