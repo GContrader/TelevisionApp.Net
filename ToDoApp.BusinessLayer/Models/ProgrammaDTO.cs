@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoApp.DataAccessLayer.Entities;
 
 namespace ToDoApp.BusinessLayer.Models
 {

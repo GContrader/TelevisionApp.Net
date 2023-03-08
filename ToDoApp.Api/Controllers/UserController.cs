@@ -23,5 +23,19 @@ namespace ToDoApp.Api.Controllers
         {
             return this.Ok(await this._userService.GetUsersAsinc());
         }
+
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<UserDTO>>> PostUserDto(CreaUserDTO dto)
+        {
+            return this.Ok(await this._userService.PostUserAsinc(dto));
+        }
+
+
+        [HttpPost("/preferito")]
+        public async Task<ActionResult> SetPreferito(int user_id, int prog_id)
+        {
+            var res = await _userService.SetPreferito(user_id, prog_id);
+            return this.Ok(res);
+        }
     }
 }

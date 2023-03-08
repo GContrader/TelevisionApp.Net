@@ -15,11 +15,11 @@ public partial class TodoappContext : DbContext
     }
 
     public virtual DbSet<TodoItem> TodoItems { get; set; }
-<<<<<<< HEAD
+
     public virtual DbSet<User> Users { get; set; }
-=======
+
     public virtual DbSet<Programma> Programma { get; set; }
->>>>>>> test_main
+
 
     public virtual DbSet<Azienda> Aziendas { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,7 +42,6 @@ public partial class TodoappContext : DbContext
                 .HasColumnName("name");
         });
 
-<<<<<<< HEAD
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(u => u.Id).HasName("PK__User");
@@ -66,7 +65,7 @@ public partial class TodoappContext : DbContext
             entity.Property(a => a.Name).HasColumnName("name");
 
         });
-=======
+
         modelBuilder.Entity<Programma>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -75,10 +74,14 @@ public partial class TodoappContext : DbContext
             entity.Property(e => e.Nome).HasColumnName("Nome");
             entity.Property(e => e.Orario).HasColumnName("Orario");
 
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.listaPreferiti)
+                .WithMany(u => u.listaUtentiConPreferito)
+                .UsingEntity(i => i.ToTable("Preferiti"));
+
 
         }
         );
->>>>>>> test_main
 
         OnModelCreatingPartial(modelBuilder);
     }
