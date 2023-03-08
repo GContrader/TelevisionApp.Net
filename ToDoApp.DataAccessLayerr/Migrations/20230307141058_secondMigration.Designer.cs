@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoApp.DataAccessLayer;
 
@@ -11,9 +12,11 @@ using ToDoApp.DataAccessLayer;
 namespace ToDoApp.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TodoappContext))]
-    partial class TodoappContextModelSnapshot : ModelSnapshot
+    [Migration("20230307141058_secondMigration")]
+    partial class secondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,51 +24,6 @@ namespace ToDoApp.DataAccessLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ToDoApp.DataAccessLayer.Entities.Azienda", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id")
-                        .HasName("PK__Azienda");
-
-                    b.ToTable("azienda", (string)null);
-                });
-
-            modelBuilder.Entity("ToDoApp.DataAccessLayer.Entities.Programma", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<long?>("AziendaId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Nome");
-
-                    b.Property<DateTime>("Orario")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("Orario");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AziendaId");
-
-                    b.ToTable("Programma", (string)null);
-                });
 
             modelBuilder.Entity("ToDoApp.DataAccessLayer.Entities.TodoItem", b =>
                 {
@@ -111,7 +69,6 @@ namespace ToDoApp.DataAccessLayer.Migrations
                         .HasColumnName("dataNascita");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("email");
 
@@ -120,32 +77,13 @@ namespace ToDoApp.DataAccessLayer.Migrations
                         .HasColumnName("indirizzo");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
-
-                    b.Property<int>("Ruolo")
-                        .HasColumnType("int")
-                        .HasColumnName("Ruolo");
 
                     b.HasKey("Id")
                         .HasName("PK__User");
 
                     b.ToTable("users", (string)null);
-                });
-
-            modelBuilder.Entity("ToDoApp.DataAccessLayer.Entities.Programma", b =>
-                {
-                    b.HasOne("ToDoApp.DataAccessLayer.Entities.Azienda", "Azienda")
-                        .WithMany("Programmi")
-                        .HasForeignKey("AziendaId");
-
-                    b.Navigation("Azienda");
-                });
-
-            modelBuilder.Entity("ToDoApp.DataAccessLayer.Entities.Azienda", b =>
-                {
-                    b.Navigation("Programmi");
                 });
 #pragma warning restore 612, 618
         }

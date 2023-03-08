@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToDoApp.DataAccessLayer.Entities;
-
 namespace ToDoApp.DataAccessLayer;
 
 public partial class TodoappContext : DbContext
@@ -15,8 +14,10 @@ public partial class TodoappContext : DbContext
     }
 
     public virtual DbSet<TodoItem> TodoItems { get; set; }
+    public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<Programma> Programma { get; set; }
 
+    public virtual DbSet<Azienda> Aziendas { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TodoItem>(entity =>
@@ -35,6 +36,34 @@ public partial class TodoappContext : DbContext
                 .HasMaxLength(60)
                 .IsUnicode(false)
                 .HasColumnName("name");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(u => u.Id).HasName("PK__User");
+
+            entity.ToTable("users");
+            entity.Property(u => u.Id)
+                .HasColumnName("id");
+            entity.Property(u => u.Name).IsRequired().HasColumnName("name");
+            entity.Property(u => u.Email).IsRequired().HasColumnName("email");
+            entity.Property(u => u.DataNascita).HasColumnName("dataNascita");
+            entity.Property(u => u.Indirizzo).HasColumnName("indirizzo");
+            entity.Property(u => u.Ruolo).IsRequired().HasColumnName("Ruolo");
+        });
+
+        modelBuilder.Entity<Azienda>(entity =>
+        {
+            entity.HasKey(a => a.Id).HasName("PK__Azienda");
+            entity.ToTable("azienda");
+
+            entity.Property(a => a.Id).HasColumnName("id");
+            entity.Property(a => a.Name).HasColumnName("name");
+
+            modelBuilder.Entity<Programma>()
+                .HasOne(u => u.Azienda)
+                .WithMany(u => u.Programmi); 
+
         });
 
         modelBuilder.Entity<Programma>(entity =>

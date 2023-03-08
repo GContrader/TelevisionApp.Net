@@ -38,7 +38,8 @@ namespace ToDoApp.Api
             });
 
             services.AddScoped<ITodoService, ToDoService>();
-            services.AddScoped<IProgrammaService, ProgrammaService>();
+            services.AddScoped<ITUserService, UserService>();
+            services.AddScoped<ITAziendaService, AziendaService>();
 
             var connectionStringDb = Configuration["Database:localhost"];
 

@@ -7,14 +7,11 @@ using ToDoApp.DataAccessLayer.Entities;
 
 namespace ToDoApp.BusinessLayer.Models
 {
-    public class ProgrammaDTO
+    public class AziendaDTO
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
 
-        public string Nome { get; set; }
-
-        public DateTime Orario { get; set; }
-
-        public Azienda Azienda { get; set; }
+        public List<Programma> Programmi {get; set; }
     }
 }

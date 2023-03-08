@@ -11,7 +11,6 @@ namespace ToDoApp.Api.Controllers
     public class TodoController : ControllerBase
     {
         private readonly ITodoService _todoService;
-
         public TodoController(ITodoService todoService)
         {
             this._todoService = todoService;
