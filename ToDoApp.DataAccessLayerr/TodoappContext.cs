@@ -74,7 +74,10 @@ public partial class TodoappContext : DbContext
             entity.Property(e => e.Nome).HasColumnName("Nome");
             entity.Property(e => e.Orario).HasColumnName("Orario");
 
-
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.listaPreferiti)
+                .WithMany(u => u.listaUtentiConPreferito)
+                .UsingEntity(i => i.ToTable("Preferiti"));
         }
         );
 

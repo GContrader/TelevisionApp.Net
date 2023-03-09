@@ -64,6 +64,9 @@ namespace ToDoApp.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<long?>("AziendaId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Nome");
@@ -73,6 +76,8 @@ namespace ToDoApp.DataAccessLayer.Migrations
                         .HasColumnName("Orario");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AziendaId");
 
                     b.ToTable("Programma", (string)null);
                 });
@@ -157,6 +162,20 @@ namespace ToDoApp.DataAccessLayer.Migrations
                         .HasForeignKey("listaUtentiConPreferitoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ToDoApp.DataAccessLayer.Entities.Programma", b =>
+                {
+                    b.HasOne("ToDoApp.DataAccessLayer.Entities.Azienda", "Azienda")
+                        .WithMany("Programmi")
+                        .HasForeignKey("AziendaId");
+
+                    b.Navigation("Azienda");
+                });
+
+            modelBuilder.Entity("ToDoApp.DataAccessLayer.Entities.Azienda", b =>
+                {
+                    b.Navigation("Programmi");
                 });
 #pragma warning restore 612, 618
         }
