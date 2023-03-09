@@ -102,9 +102,7 @@ namespace ToDoApp.BusinessLayer.Services
             if (isDone > 0)
             {
                 return true;
-            }
-
-            return false;
+            } else throw new NoChangesException();
         }
 
         public async Task<Boolean> SetPreferito(long user_id, int prog_id)
@@ -121,7 +119,7 @@ namespace ToDoApp.BusinessLayer.Services
 
                 return isDone;
             }
-            else throw new Exception();
+            else throw new NoChangesException();
         }
 
         public async Task<IEnumerable<ProgrammaDTO>> GetPreferiti(long id)
