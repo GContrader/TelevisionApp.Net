@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ToDoApp.BusinessLayer.Models;
@@ -29,7 +30,7 @@ namespace ToDoApp.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProgrammaDTO>> GetProgramma(int id)
         {
-            var dto = await this.programmaService.GetProgrammaDTOAsync(id);
+            var dto = await this.programmaService.GetProgrammaDTOAsyncById(id);
 
             if (dto == null)
             {
@@ -40,18 +41,22 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProgrammaDTO>> PostProgramma(CreaProgrammaDTO dto)
+        public async Task<ActionResult<ProgrammaDTO>> PostProgramma(CreaProgrammaDTO dto, long aziendaId)
         {
-            var itemInsert = await this.programmaService.PostProgrammaDTOAsync(dto);
+            var itemInsert = await this.programmaService.PostProgrammaDTOAsync(dto, aziendaId);
 
+            Console.WriteLine("OK");
             if (itemInsert is not null)
             {
+                Console.WriteLine("OK2");
+
                 return CreatedAtAction(
                     nameof(GetProgramma),
                     new { id = itemInsert.Id },
                     itemInsert
                 );
             }
+            Console.WriteLine("NONOK");
 
             return BadRequest();
         }
@@ -80,6 +85,12 @@ namespace ToDoApp.Api.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpGet("/listaProgrammi")]
+        public async Task<ActionResult<IEnumerable<ProgrammaDTO>>> ListaProgrammiPerOrario(DateTime orarioIn, DateTime orarioFin)
+        {      
+            return this.Ok( await this.programmaService.ListaProgrammiPerOrario(orarioIn, orarioFin));    
         }
     }
 }

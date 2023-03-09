@@ -13,7 +13,7 @@ using ToDoApp.DataAccessLayer.Entities;
 
 namespace ToDoApp.BusinessLayer.Services
 {
-    public class UserService : ITUserService
+    public class UserService : IUserService
     {
         private readonly IMapper _mapper;
         private readonly TodoappContext _db;

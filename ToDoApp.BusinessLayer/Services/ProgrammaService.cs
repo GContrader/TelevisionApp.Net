@@ -43,7 +43,7 @@ namespace ToDoApp.BusinessLayer.Services
                     .ToListAsync();
         }
 
-        public async Task<ProgrammaDTO> GetProgrammaDTOAsync(int id)
+        public async Task<ProgrammaDTO> GetProgrammaDTOAsyncById(int id)
         {
             var dto = await this._db.Programma.FindAsync(id);
 
@@ -54,20 +54,28 @@ namespace ToDoApp.BusinessLayer.Services
             return null;
         }
 
-        public async Task<ProgrammaDTO> PostProgrammaDTOAsync(CreaProgrammaDTO programmaDTO)
+        public async Task<ProgrammaDTO> PostProgrammaDTOAsync(CreaProgrammaDTO programmaDTO, long aziendaId)
         {
-            var model = new Programma
+            var azienda = await this._db.Aziendas.FindAsync(aziendaId);
+
+            if (azienda == null)
+            {
+                return null;
+            }
+
+            var programma = new Programma
             {
                 Nome = programmaDTO.Nome,
                 Orario = programmaDTO.Orario,
+                Azienda = azienda
             };
 
-            _db.Programma.Add(model);
+             _db.Programma.Add(programma);
             var isDone = await this._db.SaveChangesAsync();
 
             if (isDone > 0)
             {
-                return this._mapper.Map<ProgrammaDTO>(model);
+                return this._mapper.Map<ProgrammaDTO>(programma);
             }
 
             return null;
@@ -94,5 +102,15 @@ namespace ToDoApp.BusinessLayer.Services
 
             return false;
         }
+
+        public async Task<IEnumerable<ProgrammaDTO>> ListaProgrammiPerOrario(DateTime orarioIn, DateTime dataFin)
+        {
+           return await this._db.Programma
+                    .Where(item => item.Orario >= orarioIn && item.Orario <=dataFin)
+                    .OrderByDescending(item => item.Orario)
+                    .ProjectTo<ProgrammaDTO>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+        }
+
     }
 }

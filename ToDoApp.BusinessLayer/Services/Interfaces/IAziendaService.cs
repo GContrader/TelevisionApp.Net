@@ -7,7 +7,7 @@ using ToDoApp.BusinessLayer.Models;
 
 namespace ToDoApp.BusinessLayer.Services.Interfaces
 {
-    public interface ITAziendaService
+    public interface IAziendaService
     {
         Task<IEnumerable<AziendaDTO>> getAll();
 

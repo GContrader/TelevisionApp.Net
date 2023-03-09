@@ -11,9 +11,9 @@ namespace ToDoApp.Api.Controllers
     [ApiController]
     public class AziendaController : ControllerBase
     {
-        private readonly ITAziendaService _aziendaService;
+        private readonly IAziendaService _aziendaService;
 
-        public AziendaController(ITAziendaService aziendaService)
+        public AziendaController(IAziendaService aziendaService)
         {
             this._aziendaService = aziendaService;
         }

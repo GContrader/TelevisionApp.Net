@@ -7,7 +7,7 @@ using ToDoApp.BusinessLayer.Models;
 
 namespace ToDoApp.BusinessLayer.Services.Interfaces
 {
-    public interface ITUserService
+    public interface IUserService
     {
         Task<IEnumerable<UserDTO>> GetUsersAsinc();
         Task<UserDTO> PostUserAsinc(UserDTO userDTO);

@@ -12,9 +12,9 @@ namespace ToDoApp.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly ITUserService _userService;
+        private readonly IUserService _userService;
 
-        public UserController(ITUserService userService)
+        public UserController(IUserService userService)
         {
             this._userService = userService;    
         }
