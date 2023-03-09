@@ -12,8 +12,8 @@ using ToDoApp.DataAccessLayer;
 namespace ToDoApp.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TodoappContext))]
-    [Migration("20230308095840_aziendaMigration2")]
-    partial class aziendaMigration2
+    [Migration("20230308152014_merge")]
+    partial class merge
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace ToDoApp.DataAccessLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ProgrammaUser", b =>
+                {
+                    b.Property<int>("listaPreferitiId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("listaUtentiConPreferitoId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("listaPreferitiId", "listaUtentiConPreferitoId");
+
+                    b.HasIndex("listaUtentiConPreferitoId");
+
+                    b.ToTable("Preferiti", (string)null);
+                });
 
             modelBuilder.Entity("ToDoApp.DataAccessLayer.Entities.Azienda", b =>
                 {
@@ -135,6 +150,21 @@ namespace ToDoApp.DataAccessLayer.Migrations
                         .HasName("PK__User");
 
                     b.ToTable("users", (string)null);
+                });
+
+            modelBuilder.Entity("ProgrammaUser", b =>
+                {
+                    b.HasOne("ToDoApp.DataAccessLayer.Entities.Programma", null)
+                        .WithMany()
+                        .HasForeignKey("listaPreferitiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ToDoApp.DataAccessLayer.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("listaUtentiConPreferitoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ToDoApp.DataAccessLayer.Entities.Programma", b =>

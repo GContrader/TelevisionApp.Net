@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections;
 using System.Threading.Tasks;
 using ToDoApp.BusinessLayer.Services.Interfaces;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace ToDoApp.Api.Controllers
 
         public UserController(IUserService userService)
         {
-            this._userService = userService;    
+            this._userService = userService;
         }
 
         [HttpGet]
@@ -26,7 +25,7 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> CreateUser(UserDTO userDTO)
+        public async Task<ActionResult<UserDTO>> CreateUser(CreaUserDTO userDTO)
         {
             return this.Ok(await this._userService.PostUserAsinc(userDTO));
         }
@@ -36,7 +35,7 @@ namespace ToDoApp.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> UpdateUser(long id, UserDTO userDto)
         {
-            return this.Ok(await this._userService.UpdateUser(id, userDto));    
+            return this.Ok(await this._userService.UpdateUser(id, userDto));
         }
 
         [HttpDelete("{id}")]
@@ -44,5 +43,18 @@ namespace ToDoApp.Api.Controllers
         {
             return this.Ok(await this._userService.DeleteUser(id));
         }
+
+        [HttpPut("preferito")]
+        public async Task<ActionResult<bool>> SetPreferito(long user_id, int prog_id)
+        {
+            return this.Ok(await this._userService.SetPreferito(user_id, prog_id));
+        }
+
+        [HttpGet("lista-preferiti")]
+        public async Task<ActionResult<IEnumerable<ProgrammaDTO>>> GetPreferiti(long user_id)
+        {
+            return this.Ok(await this._userService.GetPreferiti(user_id));
+        }
+
     }
 }

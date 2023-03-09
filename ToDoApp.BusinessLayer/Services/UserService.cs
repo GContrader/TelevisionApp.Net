@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ToDoApp.BusinessLayer.Models;
 using ToDoApp.BusinessLayer.Services.Interfaces;
@@ -17,11 +16,13 @@ namespace ToDoApp.BusinessLayer.Services
     {
         private readonly IMapper _mapper;
         private readonly TodoappContext _db;
+        private readonly IProgrammaService _programmaService;
 
-        public UserService(IMapper mapper, TodoappContext db)
+        public UserService(IMapper mapper, TodoappContext db, IProgrammaService programmaService)
         {
             this._mapper = mapper;
             this._db = db;
+            this._programmaService = programmaService;
         }
 
         public async Task<IEnumerable<UserDTO>> GetUsersAsinc()
@@ -32,7 +33,7 @@ namespace ToDoApp.BusinessLayer.Services
             ;
         }
 
-        public async Task<UserDTO> PostUserAsinc(UserDTO userDTO)
+        public async Task<UserDTO> PostUserAsinc(CreaUserDTO userDTO)
         {
             var user = new User
             {
@@ -94,6 +95,7 @@ namespace ToDoApp.BusinessLayer.Services
             user.Name = userDTO.Name;
             user.DataNascita = userDTO.DataNascita; 
             user.Email = userDTO.Email;
+            user.listaPreferiti = _mapper.Map<List<Programma>>(userDTO.listaPreferiti);
 
             var isDone = await this._db.SaveChangesAsync();
 
@@ -103,6 +105,34 @@ namespace ToDoApp.BusinessLayer.Services
             }
 
             return false;
+        }
+
+        public async Task<Boolean> SetPreferito(long user_id, int prog_id)
+        {
+            var programma = await _db.Programma.AsNoTracking().FirstOrDefaultAsync(x => x.Id == prog_id);
+            var user = await this.GetUserById(user_id);
+            var res = await _db.SaveChangesAsync();
+
+
+            if (programma is not null && user is not null)
+            {
+                user.listaPreferiti.Add(_mapper.Map<ProgrammaDTO>(programma));
+                var isDone = await UpdateUser(user_id, user);
+
+                return isDone;
+            }
+            else throw new Exception();
+        }
+
+        public async Task<IEnumerable<ProgrammaDTO>> GetPreferiti(long id)
+        {
+            var user = await this._db.Users
+                .ProjectTo<UserDTO>(this._mapper.ConfigurationProvider)
+                .Where(u => u.Id == id)
+                .ToListAsync();
+            var res = new List<ProgrammaDTO>();
+            user.ForEach(u => res = u.listaPreferiti);
+            return res;
         }
     }
 
