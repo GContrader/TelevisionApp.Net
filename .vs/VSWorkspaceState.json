@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ToDoApp.Api",
+    "\\ToDoApp.Api\\Properties",
+    "\\ToDoApp.BusinessLayer\\Models",
+    "\\ToDoApp.BusinessLayer\\Services",
+    "\\ToDoApp.DataAccessLayerr",
+    "\\ToDoApp.DataAccessLayerr\\bin",
+    "\\ToDoApp.DataAccessLayerr\\bin\\Debug",
+    "\\ToDoApp.DataAccessLayerr\\bin\\Release",
+    "\\ToDoApp.DataAccessLayerr\\bin\\Release\\net7.0"
+  ],
+  "SelectedNode": "\\ToDoApp.DataAccessLayerr\\TodoappContext.cs",
+  "PreviewInSolutionExplorer": false
+}

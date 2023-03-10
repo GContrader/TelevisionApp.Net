@@ -1,0 +1,5 @@
+C:\Users\giova\OneDrive\Desktop\.net\TelevisionApp.Net\ToDoApp.BusinessLayer\obj\Debug\net7.0\ToDoApp.BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\giova\OneDrive\Desktop\.net\TelevisionApp.Net\ToDoApp.BusinessLayer\obj\Debug\net7.0\ToDoApp.BusinessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\giova\OneDrive\Desktop\.net\TelevisionApp.Net\ToDoApp.BusinessLayer\obj\Debug\net7.0\ToDoApp.BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\giova\OneDrive\Desktop\.net\TelevisionApp.Net\ToDoApp.BusinessLayer\obj\Debug\net7.0\ToDoApp.BusinessLayer.AssemblyInfo.cs
+C:\Users\giova\OneDrive\Desktop\.net\TelevisionApp.Net\ToDoApp.BusinessLayer\obj\Debug\net7.0\ToDoApp.BusinessLayer.csproj.CoreCompileInputs.cache
